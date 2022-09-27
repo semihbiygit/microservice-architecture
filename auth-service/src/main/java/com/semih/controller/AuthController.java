@@ -20,19 +20,19 @@ import static com.semih.constants.ApiUrls.*;
 public class AuthController {
     private final AuthService authService;
 
+    @PostMapping(REGISTER)
+    public ResponseEntity<Void> register(@RequestBody @Valid RegisterRequestDto dto) {
+        authService.register(dto);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping(LOGIN)
-    public ResponseEntity<String> login(DoLoginRequestDto dto) {
+    public ResponseEntity<String> login(@RequestBody @Valid DoLoginRequestDto dto) {
         if (authService.doLogin(dto)) {
             return ResponseEntity.ok("Login successful");
         } else {
             return ResponseEntity.badRequest().body("Login failed");
         }
-    }
-
-    @PostMapping(REGISTER)
-    public ResponseEntity<Void> register(@RequestBody @Valid RegisterRequestDto dto) {
-        authService.register(dto);
-        return ResponseEntity.ok().build();
     }
 
 
