@@ -26,5 +26,5 @@ public class RegisterRequestDto {
     @Email(message = "Email should be valid")
     String email;
     Roles role;
-    String RoleAdminPassword;
+    String roleAdminPassword;
 }
