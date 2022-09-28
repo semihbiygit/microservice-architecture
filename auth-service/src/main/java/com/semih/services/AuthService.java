@@ -1,7 +1,9 @@
 package com.semih.services;
 
+import com.semih.dto.request.CreateNewUserDto;
 import com.semih.dto.request.DoLoginRequestDto;
 import com.semih.dto.request.RegisterRequestDto;
+import com.semih.manager.IUserManager;
 import com.semih.repository.IAuthRepository;
 import com.semih.repository.entity.Auth;
 import com.semih.repository.enums.Roles;
@@ -13,9 +15,12 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
     private final IAuthRepository authRepository;
 
-    public AuthService(IAuthRepository authRepository) {
+    private final IUserManager userManager;
+
+    public AuthService(IAuthRepository authRepository, IUserManager userManager) {
         super(authRepository);
         this.authRepository = authRepository;
+        this.userManager = userManager;
     }
 
     public Auth register(RegisterRequestDto dto) {
@@ -30,7 +35,13 @@ public class AuthService extends ServiceManager<Auth, Long> {
             else {
                 auth.setRole(Roles.USER);
             }
-        return authRepository.save(auth);
+        save(auth);
+        userManager.CreateNewUser(CreateNewUserDto.builder()
+                .authId(auth.getId())
+                .username(dto.getUsername())
+                .email(dto.getEmail())
+                .build());
+        return auth;
     }
 
     public boolean doLogin(DoLoginRequestDto dto) {

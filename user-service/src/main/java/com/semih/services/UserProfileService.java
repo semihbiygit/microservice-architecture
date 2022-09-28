@@ -1,6 +1,6 @@
 package com.semih.services;
 
-import com.semih.dto.request.NewUserCreateDto;
+import com.semih.dto.request.CreateNewUserDto;
 import com.semih.repository.IUserProfileRepository;
 import com.semih.repository.entity.UserProfile;
 import com.semih.utility.ServiceManager;
@@ -16,7 +16,7 @@ public class UserProfileService extends ServiceManager<UserProfile, Long> {
         this.userProfileRepository = userProfileRepository;
     }
 
-    public UserProfile createUserProfile(NewUserCreateDto dto) {
+    public UserProfile createUserProfile(CreateNewUserDto dto) {
         return save(UserProfile.builder()
                 .authId(dto.getAuthId())
                 .username(dto.getUsername())
