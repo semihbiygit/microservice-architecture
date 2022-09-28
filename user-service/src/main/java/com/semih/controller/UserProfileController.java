@@ -1,6 +1,7 @@
 package com.semih.controller;
 
 import com.semih.dto.request.CreateNewUserDto;
+import com.semih.dto.request.EditProfileRequestDto;
 import com.semih.exception.ErrorType;
 import com.semih.exception.UserManagerException;
 import com.semih.services.UserProfileService;
@@ -29,6 +30,18 @@ public class UserProfileController {
             return ResponseEntity.ok(true);
         } catch (Exception e) {
             throw new UserManagerException(ErrorType.USER_CANNOT_CREATE);
+        }
+    }
+
+    @PostMapping(UPDATE_PROFILE)
+    public ResponseEntity<Boolean> updateProfile(@RequestBody @Valid EditProfileRequestDto dto) {
+        if (dto.getToken() == null)
+            throw new UserManagerException(ErrorType.INVALID_TOKEN);
+        try {
+            Long authId = Long.parseLong(dto.getToken().substring(3, dto.getToken().indexOf("X")));
+            return ResponseEntity.ok(userProfileService.updateUserProfile(dto, authId));
+        } catch (Exception exception) {
+            throw new UserManagerException(ErrorType.INVALID_TOKEN);
         }
     }
 }

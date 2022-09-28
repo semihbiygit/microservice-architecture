@@ -10,6 +10,8 @@ import com.semih.repository.enums.Roles;
 import com.semih.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AuthService extends ServiceManager<Auth, Long> {
 
@@ -44,8 +46,9 @@ public class AuthService extends ServiceManager<Auth, Long> {
         return auth;
     }
 
-    public boolean doLogin(DoLoginRequestDto dto) {
-        return authRepository.isExists(dto.getUsername(), dto.getPassword());
+    public Optional<Auth> doLogin(DoLoginRequestDto dto) {
+        return authRepository.findOptionalByUsernameIgnoreCaseAndPassword(dto.getUsername(),
+                dto.getPassword());
     }
 
 }

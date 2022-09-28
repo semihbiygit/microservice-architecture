@@ -15,7 +15,6 @@ public enum ErrorType {
 
     INTERNAL_ERROR(2000, "Internal Server Error", INTERNAL_SERVER_ERROR),
     BAD_REQUEST_ERROR(2001, "Invalid Parameter Error", BAD_REQUEST),
-    INVALID_TOKEN(2002, "Invalid Token", BAD_REQUEST),
     USER_CANNOT_CREATE(3001, "User cannot creatD", INTERNAL_SERVER_ERROR),
     LOGIN_ERROR_WRONG(1000, "Username or password in-correct", INTERNAL_SERVER_ERROR),
     LOGIN_ERROR_REQUIRED_PASSWORD(1001, "Password requirements, enter a valid password", INTERNAL_SERVER_ERROR),
