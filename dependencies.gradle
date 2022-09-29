@@ -9,21 +9,24 @@ ext {
             auth0      : "4.0.0"
     ]
     libs = [
-            springBoot            : "org.springframework.boot:spring-boot-starter:$versions.springBoot",
-            springBootWeb         : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
-            springBootJpa         : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
-            springValidation      : "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
-            springBootActuator    : "org.springframework.boot:spring-boot-starter-actuator:$versions.springBoot",
-            springBootThymeleaf   : "org.springframework.boot:spring-boot-starter-thymeleaf:$versions.springBoot",
-            springBootDevtools    : "org.springframework.boot:spring-boot-devtools:$versions.springBoot",
-            springOpenFeign       : "org.springframework.cloud:spring-cloud-starter-openfeign:$versions.springCloud",
-            postgresql            : "org.postgresql:postgresql:$versions.postgresql",
-            lombok                : "org.projectlombok:lombok:$versions.lombok",
-            mapstruct             : "org.mapstruct:mapstruct:$versions.mapstruct",
-            mapstructProcessor    : "org.mapstruct:mapstruct-processor:$versions.mapstruct",
-            lombokMapstructBinding: "org.projectlombok:lombok-mapstruct-binding:0.2.0",
-            openApi               : "org.springdoc:springdoc-openapi-ui:$versions.openApi",
-            JavaJWT               : "com.auth0:java-jwt:$versions.auth0"
+            springBoot              : "org.springframework.boot:spring-boot-starter:$versions.springBoot",
+            springBootWeb           : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
+            springBootJpa           : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
+            springValidation        : "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
+            springBootActuator      : "org.springframework.boot:spring-boot-starter-actuator:$versions.springBoot",
+            springBootThymeleaf     : "org.springframework.boot:spring-boot-starter-thymeleaf:$versions.springBoot",
+            springBootDevtools      : "org.springframework.boot:spring-boot-devtools:$versions.springBoot",
+            springOpenFeign         : "org.springframework.cloud:spring-cloud-starter-openfeign:$versions.springCloud",
+            springCloudConfigServer : "org.springframework.cloud:spring-cloud-config-server:$versions.springCloud",
+            springCloudConfigClient : "org.springframework.cloud:spring-cloud-config-client:$versions.springCloud",
+            springCloudConfigStarter: "org.springframework.cloud:spring-cloud-starter-config:$versions.springCloud",
+            postgresql              : "org.postgresql:postgresql:$versions.postgresql",
+            lombok                  : "org.projectlombok:lombok:$versions.lombok",
+            mapstruct               : "org.mapstruct:mapstruct:$versions.mapstruct",
+            mapstructProcessor      : "org.mapstruct:mapstruct-processor:$versions.mapstruct",
+            lombokMapstructBinding  : "org.projectlombok:lombok-mapstruct-binding:0.2.0",
+            openApi                 : "org.springdoc:springdoc-openapi-ui:$versions.openApi",
+            JavaJWT                 : "com.auth0:java-jwt:$versions.auth0"
     ]
 
 
