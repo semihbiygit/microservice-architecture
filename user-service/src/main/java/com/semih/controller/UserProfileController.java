@@ -5,6 +5,7 @@ import com.semih.dto.request.EditProfileRequestDto;
 import com.semih.exception.ErrorType;
 import com.semih.exception.UserManagerException;
 import com.semih.services.UserProfileService;
+import com.semih.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+import java.util.Optional;
+
 import static com.semih.constants.ApiUrls.*;
 
 
@@ -22,6 +25,7 @@ import static com.semih.constants.ApiUrls.*;
 @RequiredArgsConstructor
 public class UserProfileController {
     private final UserProfileService userProfileService;
+    private final JwtTokenManager jwtTokenManager;
 
     @PostMapping(CREATE_NEW_USER)
     public ResponseEntity<Boolean> CreateNewUser(@RequestBody @Valid CreateNewUserDto dto) {
@@ -35,11 +39,11 @@ public class UserProfileController {
 
     @PostMapping(UPDATE_PROFILE)
     public ResponseEntity<Boolean> updateProfile(@RequestBody @Valid EditProfileRequestDto dto) {
-        if (dto.getToken() == null)
-            throw new UserManagerException(ErrorType.INVALID_TOKEN);
         try {
-            Long authId = Long.parseLong(dto.getToken().substring(3, dto.getToken().indexOf("X")));
-            return ResponseEntity.ok(userProfileService.updateUserProfile(dto, authId));
+            Optional<Long> authId = jwtTokenManager.getUserId(dto.getToken());
+            if (authId.isEmpty())
+                throw new UserManagerException(ErrorType.INVALID_TOKEN);
+            return ResponseEntity.ok(userProfileService.updateUserProfile(dto, authId.get()));
         } catch (Exception exception) {
             throw new UserManagerException(ErrorType.INVALID_TOKEN);
         }

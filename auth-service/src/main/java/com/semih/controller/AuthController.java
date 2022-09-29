@@ -4,6 +4,7 @@ import com.semih.dto.request.DoLoginRequestDto;
 import com.semih.dto.request.RegisterRequestDto;
 import com.semih.repository.entity.Auth;
 import com.semih.services.AuthService;
+import com.semih.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import static com.semih.constants.ApiUrls.*;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final JwtTokenManager jwtTokenManager;
 
     @PostMapping(REGISTER)
     public ResponseEntity<Void> register(@RequestBody @Valid RegisterRequestDto dto) {
@@ -33,7 +35,7 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody @Valid DoLoginRequestDto dto) {
         Optional<Auth> auth = authService.doLogin(dto);
         if (auth.isPresent()) {
-            String token = "token: TKN" + auth.get().getId().toString() + "X16S7";
+            String token = jwtTokenManager.createToken(auth.get().getId()).get();
             return ResponseEntity.ok(token);
         }
         return ResponseEntity.badRequest().body("Login failed");
