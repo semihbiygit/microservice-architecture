@@ -1,0 +1,12 @@
+server:
+  port: 9092
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/QuizDBMain
+    username: postgres
+    password: asdsaddas
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
