@@ -26,7 +26,7 @@ public class UserProfileController {
 
     @GetMapping("/test")
     public String getTestString() {
-        return "test";
+        return "User test";
     }
 
     @PostMapping(CREATE_NEW_USER)

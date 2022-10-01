@@ -1,12 +1,18 @@
 server:
-  port: 9091
+  port: ${SERVERPORT}
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/QuizDBUser
-    username: postgres
-    password: asdsaddas
+    url: ${DBURL}
+    username: ${DBUSERNAME}
+    password: ${DBPASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+raceapplication:
+  url:
+    auth: ${AUTHURL}
+    main: ${MAINURL}
+    user: ${USERURL}
