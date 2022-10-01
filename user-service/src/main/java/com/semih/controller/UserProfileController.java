@@ -8,10 +8,7 @@ import com.semih.services.UserProfileService;
 import com.semih.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -26,6 +23,11 @@ import static com.semih.constants.ApiUrls.*;
 public class UserProfileController {
     private final UserProfileService userProfileService;
     private final JwtTokenManager jwtTokenManager;
+
+    @GetMapping("/test")
+    public String getTestString() {
+        return "test";
+    }
 
     @PostMapping(CREATE_NEW_USER)
     public ResponseEntity<Boolean> CreateNewUser(@RequestBody @Valid CreateNewUserDto dto) {
