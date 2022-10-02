@@ -12,15 +12,15 @@ spring:
         - RewritePath=/(?<segment>.*), /v1/api/$\{segment}
       routes:
         - id: auth-service
-          uri: http://localhost:9090
+          uri: ${AUTHURL}
           predicates:
             - Path=/auth/**
         - id: main-service
-          uri: http://localhost:9092
+          uri: ${MAINURL}
           predicates:
             - Path=/main/**
         - id: user-service
-          uri: http://localhost:9091
+          uri: ${USERURL}
           predicates:
             - Path=/user/**
           filters:
@@ -28,4 +28,3 @@ spring:
               args:
                 name: user-service
                 fallbackUri: forward:/fallback/userService
-            - RewritePath=/user(?<segment>.*), /$\{segment}

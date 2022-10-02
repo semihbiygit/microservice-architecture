@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gatewayployment
+  name: gateway-deployment
   labels:
     team: yarismadevelopersteam
 spec:
@@ -15,7 +15,7 @@ spec:
         app: gateway-service
     spec:
       containers:
-        - image: semihbiygit/yarismauygulamasigateway:v001
+        - image: semihbiygit/apigateway:v1.1
           name: podgateway
           resources:
             requests:
@@ -30,15 +30,15 @@ spec:
             - name: AUTHURL
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: gateway_auth_url
             - name: MAINURL
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: gateway_main_url
             - name: USERURL
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: gateway_user_url

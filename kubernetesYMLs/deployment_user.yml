@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: userployment
+  name: user-deployment
   labels:
     team: yarismadevelopersteam
 spec:
@@ -15,7 +15,7 @@ spec:
         app: user-service
     spec:
       containers:
-        - image: semihbiygit/yarismauygulamasiuser:v001
+        - image: semihbiygit/userservice:v1.0
           name: poduser
           resources:
             requests:
@@ -30,35 +30,40 @@ spec:
             - name: SERVERPORT
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: user_port
             - name: DBUSERNAME
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: db_username
             - name: DBPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: db_password
             - name: DBURL
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: db_url
             - name: AUTHURL
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: auth_url
             - name: MAINURL
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: main_url
             - name: USERURL
               valueFrom:
                 secretKeyRef:
-                  name: secret_object
+                  name: secretobject
                   key: user_url
+            - name: CONFIGSERVER
+              valueFrom:
+                secretKeyRef:
+                  name: secretobject
+                  key: config_server_url

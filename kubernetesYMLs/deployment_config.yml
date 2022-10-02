@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: configployment
+  name: config-deployment
   labels:
     team: yarismadevelopersteam
 spec:
@@ -15,7 +15,7 @@ spec:
         app: config-service
     spec:
       containers:
-        - image: semihbiygit/yarismauygulamasiconfig:v001
+        - image: semihbiygit/configserver:v1.0
           name: podconfig
           resources:
             requests:
