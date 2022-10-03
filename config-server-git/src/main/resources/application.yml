@@ -1,0 +1,15 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: config-server-git
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/semihBiygit/git-config"
+          default-label: main
+          skip-ssl-validation: true
+          username: "semihbiygit"
+          password: ${git_local_token}
