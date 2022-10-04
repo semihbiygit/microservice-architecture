@@ -31,7 +31,7 @@ ext {
             mapstructProcessor                     : "org.mapstruct:mapstruct-processor:$versions.mapstruct",
             lombokMapstructBinding                 : "org.projectlombok:lombok-mapstruct-binding:0.2.0",
             openApi                                : "org.springdoc:springdoc-openapi-ui:$versions.openApi",
-            JavaJWT                                : "com.auth0:java-jwt:$versions.auth0"
+            javaJWT                                : "com.auth0:java-jwt:$versions.auth0"
     ]
 
 
