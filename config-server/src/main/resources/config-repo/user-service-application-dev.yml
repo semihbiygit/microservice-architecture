@@ -14,6 +14,6 @@ spring:
 
 raceapplication:
   url:
-    auth: http://localhost:9090/auth-service/
-    user: http://localhost:9091/user-service/
-    main: http://localhost:9092/main-service/
+    auth: http://localhost:9090/
+    user: http://localhost:9091/
+    main: http://localhost:9092/

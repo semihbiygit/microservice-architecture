@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class QuestionRequestDto {
-    private String token;
-    private String questionContent;
-    private int time;
-    private long creatorId;
-    private int answerCount;
+public class CompetitionQuestionsRequestDto {
+    String token;
+    Long questionId;
+    Long competitionId;
+    Long time;
+    int rankNumber;
 }

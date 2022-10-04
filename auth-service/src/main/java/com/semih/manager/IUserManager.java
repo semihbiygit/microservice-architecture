@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * All feign operations must be given unique naming.
  */
 
-@FeignClient(url = "${raceapplication.url.user}/v1/api/user", name = "user-service-userprofile", decode404 = true)
+@FeignClient(url = "${raceapplication.url.user}v1/api/user",name = "user-service-userprofile",decode404 = true)
 public interface IUserManager {
 
     @PostMapping("/create-new-user")

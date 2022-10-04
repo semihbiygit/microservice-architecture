@@ -20,4 +20,7 @@ public class ApiUrls {
     //main service
     public static final String MAIN = "/main";
     public static final String QUESTION_GROUP = "/question-group";
+    public static final String QUESTION = "/question";
+    public static final String COMPETITION = "/competition";
+    public static final String COMPETITION_QUESTION = "/competition-question";
 }
