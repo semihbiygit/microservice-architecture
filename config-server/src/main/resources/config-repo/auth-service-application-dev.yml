@@ -6,7 +6,6 @@ spring:
     user:
       name: semih
       password: 12345
-
   datasource:
     url: 'jdbc:postgresql://localhost:5432/QuizDB'
     username: 'postgres'

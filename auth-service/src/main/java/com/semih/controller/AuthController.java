@@ -4,7 +4,7 @@ import com.semih.dto.request.DoLoginRequestDto;
 import com.semih.dto.request.RegisterRequestDto;
 import com.semih.repository.entity.Auth;
 import com.semih.services.AuthService;
-import com.semih.utility.JwtTokenManager;
+import com.semih.config.security.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
