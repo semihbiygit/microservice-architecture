@@ -25,11 +25,17 @@ public class AuthService extends ServiceManager<Auth, Long> {
         this.userManager = userManager;
     }
 
+    public Optional<Auth> doLogin(DoLoginRequestDto dto) {
+        return authRepository.findOptionalByUsernameIgnoreCaseAndPassword(dto.getUsername(),
+                dto.getPassword());
+    }
+
     public Auth register(RegisterRequestDto dto) {
         Auth auth;
         auth = Auth.builder()
                 .password(dto.getPassword())
                 .username(dto.getUsername())
+                .role(Roles.USER)
                 .build();
         if (dto.getRoleAdminPassword() != null)
             if (dto.getRoleAdminPassword().equals("admin"))
@@ -46,10 +52,6 @@ public class AuthService extends ServiceManager<Auth, Long> {
         return auth;
     }
 
-    public Optional<Auth> doLogin(DoLoginRequestDto dto) {
-        return authRepository.findOptionalByUsernameIgnoreCaseAndPassword(dto.getUsername(),
-                dto.getPassword());
-    }
 
 }
 

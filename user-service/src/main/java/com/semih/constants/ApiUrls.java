@@ -11,4 +11,5 @@ public class ApiUrls {
     public static final String USER = "/user";
     public static final String CREATE_NEW_USER = "/create-new-user";
     public static final String UPDATE_PROFILE = "/update-profile";
+    public static final String FIND_ALL = "/find-all";
 }
