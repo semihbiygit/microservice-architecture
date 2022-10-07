@@ -6,10 +6,7 @@ import com.semih.mapper.IUserProfileMapper;
 import com.semih.repository.IUserProfileRepository;
 import com.semih.repository.entity.UserProfile;
 import com.semih.utility.ServiceManager;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +44,12 @@ public class UserProfileService extends ServiceManager<UserProfile, Long> {
     }
 
     public Page<UserProfile> findAllPage(int currentPage, int pageSize, String sortParameter, String sortDirection) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortParameter);
+        Pageable pageable = PageRequest.of(currentPage, pageSize, sort);
+        return userProfileRepository.findAll(pageable);
+    }
+
+    public Slice<UserProfile> findAllSlice(int currentPage, int pageSize, String sortParameter, String sortDirection) {
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortParameter);
         Pageable pageable = PageRequest.of(currentPage, pageSize, sort);
         return userProfileRepository.findAll(pageable);

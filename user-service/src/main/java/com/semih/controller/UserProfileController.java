@@ -9,6 +9,7 @@ import com.semih.services.UserProfileService;
 import com.semih.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,8 +56,23 @@ public class UserProfileController {
         }
     }
 
-    @GetMapping(FIND_ALL)
+    @GetMapping(FIND_ALL_PAGE)
     public ResponseEntity<Page<UserProfile>> findAll(int currentPage, int pageSize, String sortParameter, String sortDirection) {
         return ResponseEntity.ok(userProfileService.findAllPage(currentPage, pageSize, sortParameter, sortDirection));
     }
+
+    @GetMapping(FIND_ALL_SLICE)
+    public ResponseEntity<Slice<UserProfile>> findAllSlice(int currentPage, int pageSize, String sortParameter, String sortDirection) {
+        return ResponseEntity.ok(userProfileService.findAllSlice(currentPage, pageSize, sortParameter, sortDirection));
+    }
+
+    @GetMapping("/find-all-criteria/{page}/{size}/{sortParameter}/{direction}")
+    public ResponseEntity<Slice<UserProfile>> findAllCriteria(@PathVariable int page,
+                                                              @PathVariable int size,
+                                                              @PathVariable String sortParameter,
+                                                              @PathVariable String direction) {
+        return ResponseEntity.ok(userProfileService.findAllSlice(page, size, sortParameter, direction));
+
+    }
+
 }
