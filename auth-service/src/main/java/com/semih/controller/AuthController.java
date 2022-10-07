@@ -7,6 +7,7 @@ import com.semih.services.AuthService;
 import com.semih.config.security.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ public class AuthController {
 
     // http://localhost:9090/v1/api/auth/test
     @GetMapping("/test")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public String getTestString() {
         return "Auth test";
     }
