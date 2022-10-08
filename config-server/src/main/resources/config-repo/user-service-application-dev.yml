@@ -1,6 +1,14 @@
 server:
   port: 9091
 
+logging:
+  level:
+    root: WARN
+    com.semih: DEBUG
+    org.springframework: INFO
+  file:
+    name: user-service-application.log
+
 spring:
   datasource:
     url: 'jdbc:postgresql://localhost:5432/QuizDB'

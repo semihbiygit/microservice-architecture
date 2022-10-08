@@ -8,11 +8,10 @@ import com.semih.repository.entity.UserProfile;
 import com.semih.services.UserProfileService;
 import com.semih.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +26,7 @@ import static com.semih.constants.ApiUrls.*;
 @RestController
 @RequestMapping(BASE_URL + USER)
 @RequiredArgsConstructor
+@Slf4j
 public class UserProfileController {
     private final UserProfileService userProfileService;
     private final JwtTokenManager jwtTokenManager;
@@ -90,6 +90,7 @@ public class UserProfileController {
 
     @GetMapping("/get-all-cache")
     public List<UserProfile> getAllCache() {
+        log.info("Fetching all users....");
         return userProfileService.getAllCache();
     }
 
