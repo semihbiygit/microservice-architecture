@@ -8,6 +8,8 @@ import com.semih.repository.entity.UserProfile;
 import com.semih.services.UserProfileService;
 import com.semih.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
@@ -73,6 +75,22 @@ public class UserProfileController {
                                                               @PathVariable String direction) {
         return ResponseEntity.ok(userProfileService.findAllSlice(page, size, sortParameter, direction));
 
+    }
+
+    @GetMapping("/redis")
+    @Cacheable(value = "redis-test")
+    public String redisTest(String message) {
+        try {
+            Thread.sleep(3000);
+            return "Your message... :" + message;
+        } catch (Exception e) {
+            return "ERROR";
+        }
+    }
+
+    @GetMapping("/get-all-cache")
+    public List<UserProfile> getAllCache() {
+        return userProfileService.getAllCache();
     }
 
 }
