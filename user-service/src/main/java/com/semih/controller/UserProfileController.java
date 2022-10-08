@@ -93,4 +93,9 @@ public class UserProfileController {
         return userProfileService.getAllCache();
     }
 
+    @GetMapping("/clear-cache")
+    public void clearCache(String key, String parameter) {
+        userProfileService.clearCache(key, parameter);
+    }
+
 }

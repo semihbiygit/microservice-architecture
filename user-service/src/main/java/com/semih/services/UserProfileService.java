@@ -7,6 +7,8 @@ import com.semih.repository.IUserProfileRepository;
 import com.semih.repository.entity.UserProfile;
 import com.semih.utility.ServiceManager;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import java.util.Optional;
 @Service
 public class UserProfileService extends ServiceManager<UserProfile, Long> {
 
+    @Autowired
+    private CacheManager cacheManager;
     private final IUserProfileRepository userProfileRepository;
 
     public UserProfileService(IUserProfileRepository userProfileRepository) {
@@ -55,6 +59,10 @@ public class UserProfileService extends ServiceManager<UserProfile, Long> {
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortParameter);
         Pageable pageable = PageRequest.of(currentPage, pageSize, sort);
         return userProfileRepository.findAll(pageable);
+    }
+
+    public void clearCache(String key, String parameter) {
+        cacheManager.getCache(key).evict(parameter);
     }
 
     @Cacheable(value = "userprofile_getall")
