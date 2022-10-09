@@ -9,6 +9,7 @@ import com.semih.services.UserProfileService;
 import com.semih.utility.JwtTokenManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Slice;
@@ -75,6 +76,15 @@ public class UserProfileController {
                                                               @PathVariable String direction) {
         return ResponseEntity.ok(userProfileService.findAllSlice(page, size, sortParameter, direction));
 
+    }
+
+    @GetMapping("/findall")
+    public ResponseEntity<List<UserProfile>> findAll() {
+        Long start = System.currentTimeMillis();
+        List<UserProfile> lists = userProfileService.findAll();
+        Long end = System.currentTimeMillis();
+        System.out.println("Time UserService....: " + (end - start));
+        return ResponseEntity.ok(lists);
     }
 
     @GetMapping("/redis")
