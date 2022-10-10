@@ -1,13 +1,13 @@
 server:
   port: 9091
 
-logging:
-  level:
-    root: WARN
-    com.semih: DEBUG
-    org.springframework: INFO
-  file:
-    name: user-service-application.log
+#logging:
+#  level:
+#    root: WARN
+#    com.semih: DEBUG
+#    org.springframework: INFO
+#  file:
+#    name: user-service-application.log
 
 spring:
   datasource:
