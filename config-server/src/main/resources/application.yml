@@ -3,9 +3,14 @@ server:
 
 spring:
   application:
-    name:config-server
+    name: config-server
   profiles:
     active: native
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    service:
+      name: config-server
   cloud:
     config:
       server:

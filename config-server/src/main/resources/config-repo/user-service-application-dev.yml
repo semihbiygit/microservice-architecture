@@ -10,6 +10,11 @@ server:
 #    name: user-service-application.log
 
 spring:
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    service:
+      name: user-service
   datasource:
     url: 'jdbc:postgresql://localhost:5432/QuizDB'
     username: 'postgres'
