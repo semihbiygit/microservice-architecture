@@ -10,11 +10,6 @@ server:
 #    name: user-service-application.log
 
 spring:
-  zipkin:
-    base-url: http://localhost:9411
-    enabled: true
-    service:
-      name: user-service
   datasource:
     url: 'jdbc:postgresql://localhost:5432/QuizDB'
     username: 'postgres'
@@ -24,6 +19,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: semih
+    password: 12345
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    service:
+      name: user-service
 
 raceapplication:
   url:

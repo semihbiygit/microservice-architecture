@@ -2,11 +2,6 @@ server:
   port: 9090
 
 spring:
-  zipkin:
-    base-url: http://localhost:9411
-    enabled: true
-    service:
-      name: auth-service
   security:
     user:
       name: semih
@@ -20,6 +15,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: semih
+    password: 12345
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    service:
+      name: auth-service
 
 raceapplication:
   url:

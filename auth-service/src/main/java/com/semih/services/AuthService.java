@@ -4,6 +4,8 @@ import com.semih.dto.request.CreateNewUserDto;
 import com.semih.dto.request.DoLoginRequestDto;
 import com.semih.dto.request.RegisterRequestDto;
 import com.semih.manager.IUserManager;
+import com.semih.rabbitmq.model.CreateUser;
+import com.semih.rabbitmq.producer.CreateUserProducer;
 import com.semih.repository.IAuthRepository;
 import com.semih.repository.entity.Auth;
 import com.semih.repository.enums.Roles;
@@ -16,13 +18,14 @@ import java.util.Optional;
 public class AuthService extends ServiceManager<Auth, Long> {
 
     private final IAuthRepository authRepository;
-
     private final IUserManager userManager;
+    private final CreateUserProducer createUserProducer;
 
-    public AuthService(IAuthRepository authRepository, IUserManager userManager) {
+    public AuthService(IAuthRepository authRepository, IUserManager userManager, CreateUserProducer createUserProducer) {
         super(authRepository);
         this.authRepository = authRepository;
         this.userManager = userManager;
+        this.createUserProducer = createUserProducer;
     }
 
     public Optional<Auth> doLogin(DoLoginRequestDto dto) {
@@ -44,10 +47,20 @@ public class AuthService extends ServiceManager<Auth, Long> {
                 auth.setRole(Roles.USER);
             }
         save(auth);
-        userManager.CreateNewUser(CreateNewUserDto.builder()
+        /**
+         *
+         userManager.CreateNewUser(CreateNewUserDto.builder()
+         .authId(auth.getId())
+         .username(dto.getUsername())
+         .email(dto.getEmail())
+         .build());
+         */
+
+        createUserProducer.sendCreateUserMessage(CreateUser.builder()
                 .authId(auth.getId())
-                .username(dto.getUsername())
                 .email(dto.getEmail())
+                .username(dto.getUsername())
+                .password(dto.getPassword())
                 .build());
         return auth;
     }
