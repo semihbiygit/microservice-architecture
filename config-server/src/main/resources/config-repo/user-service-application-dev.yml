@@ -10,15 +10,13 @@ server:
 #    name: user-service-application.log
 
 spring:
-  datasource:
-    url: 'jdbc:postgresql://localhost:5432/QuizDB'
-    username: 'postgres'
-    password: 'asdsaddas'
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+  data:
+    mongodb:
+      host: 146.148.69.120
+      port: 19589
+      database: quizdb
+      username: UserSemih
+      password: "asdsaddas"
   rabbitmq:
     host: localhost
     port: 5672
@@ -29,7 +27,9 @@ spring:
     enabled: true
     service:
       name: user-service
-
+  redis:
+    host: localhost
+    port: 6379
 raceapplication:
   url:
     auth: http://localhost:9090/

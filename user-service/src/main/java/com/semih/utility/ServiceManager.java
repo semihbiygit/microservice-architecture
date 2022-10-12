@@ -1,14 +1,15 @@
 package com.semih.utility;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ServiceManager<T, ID> implements IServices<T, ID> {
 
-    private final JpaRepository<T, ID> service;
+    private final MongoRepository<T, ID> service;
 
-    public ServiceManager(JpaRepository<T, ID> service) {
+    public ServiceManager(MongoRepository<T, ID> service) {
         this.service = service;
     }
 
@@ -41,8 +42,8 @@ public class ServiceManager<T, ID> implements IServices<T, ID> {
 
 
     @Override
-    public T findById(ID id) {
-        return service.getReferenceById(id);
+    public Optional<T> findById(ID id) {
+        return service.findById(id);
     }
 
     @Override
