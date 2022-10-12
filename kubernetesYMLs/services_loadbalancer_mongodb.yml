@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer-mongodb
+spec:
+  selector:
+    app: mongodb
+  type: LoadBalancer
+  ports:
+  - name: mongodbtcp
+    port: 19589
+    targetPort: 27017
