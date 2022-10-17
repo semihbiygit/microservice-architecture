@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
 import java.util.Date;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class JwtTokenManager {
                     .withAudience()
                     .withClaim("id", id)
                     .withIssuer("semih")
-                    .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60*5))
+                    .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 5))
                     .withIssuedAt(new Date())
                     .sign(Algorithm.HMAC256(secretKey));
             return Optional.of(token);
@@ -63,6 +64,24 @@ public class JwtTokenManager {
             return Optional.of(decode.getClaim("id").asLong());
         } catch (Exception e) {
             return Optional.empty();
+        }
+    }
+
+    public String encryptPassword(String password) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes());
+            byte byteData[] = md.digest();
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < byteData.length; i++) {
+                sb.append(Integer
+                        .toString((byteData[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return null;
         }
     }
 

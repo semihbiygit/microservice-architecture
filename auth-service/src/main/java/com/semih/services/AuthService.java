@@ -1,5 +1,6 @@
 package com.semih.services;
 
+import com.semih.config.security.JwtTokenManager;
 import com.semih.dto.request.CreateNewUserDto;
 import com.semih.dto.request.DoLoginRequestDto;
 import com.semih.dto.request.RegisterRequestDto;
@@ -20,23 +21,27 @@ public class AuthService extends ServiceManager<Auth, Long> {
     private final IAuthRepository authRepository;
     private final IUserManager userManager;
     private final CreateUserProducer createUserProducer;
+    private final JwtTokenManager jwtTokenManager;
 
-    public AuthService(IAuthRepository authRepository, IUserManager userManager, CreateUserProducer createUserProducer) {
+    public AuthService(IAuthRepository authRepository, IUserManager userManager, CreateUserProducer createUserProducer, JwtTokenManager jwtTokenManager) {
         super(authRepository);
         this.authRepository = authRepository;
         this.userManager = userManager;
         this.createUserProducer = createUserProducer;
+        this.jwtTokenManager = jwtTokenManager;
     }
 
     public Optional<Auth> doLogin(DoLoginRequestDto dto) {
+        String encodedPassword = jwtTokenManager.encryptPassword(dto.getPassword());
         return authRepository.findOptionalByUsernameIgnoreCaseAndPassword(dto.getUsername(),
-                dto.getPassword());
+                encodedPassword);
     }
 
     public Auth register(RegisterRequestDto dto) {
+        String encodedPassword = jwtTokenManager.encryptPassword(dto.getPassword());
         Auth auth;
         auth = Auth.builder()
-                .password(dto.getPassword())
+                .password(encodedPassword)
                 .username(dto.getUsername())
                 .role(Roles.USER)
                 .build();
@@ -60,7 +65,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
                 .authId(auth.getId())
                 .email(dto.getEmail())
                 .username(dto.getUsername())
-                .password(dto.getPassword())
+                .password(encodedPassword)
                 .build());
         return auth;
     }
